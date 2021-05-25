@@ -442,6 +442,13 @@ function manual_setup($setup) {
     $id = substr($setup['this'][0], 0, -4);
     $language_chooser = 'manual_language_chooser';
     $repo = strtolower($config['lang']); // pt_BR etc.
+    
+    $bugsUrl = 'https://bugs.php.net/report.php?bug_type=Documentation+problem&amp;manpage=' . $id;
+    $issuesEnabled = ['en', 'ru', 'tr'];
+    if(in_array($repo, $issuesEnabled, true)) {
+        $bugsUrl = 'https://github.com/php/doc-' . $repo . '/issues/new?body=' . urlencode("---\nFrom manual page: https://php.net/$id\n---");
+    }
+    
     echo <<<PAGE_TOOLS
   <div class="page-tools">
     <div class="change-language">
@@ -449,7 +456,7 @@ function manual_setup($setup) {
     </div>
     <div class="edit-bug">
       <a href="https://github.com/php/doc-{$repo}">Submit a Pull Request</a>
-      <a href="https://bugs.php.net/report.php?bug_type=Documentation+problem&amp;manpage=$id">Report a Bug</a>
+      <a href="$bugsUrl">Report a Bug</a>
     </div>
   </div>
 PAGE_TOOLS;
