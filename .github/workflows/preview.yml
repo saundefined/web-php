@@ -1,0 +1,33 @@
+name: Preview PR
+on:
+  pull_request_target:
+
+jobs:
+  build:
+    runs-on: "ubuntu-22.04"
+    if: github.repository_owner == 'saundefined'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.number }}/merge"
+
+      - uses: easingthemes/ssh-deploy@main
+        with:
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          TARGET: "/var/www/subdomains/pr-${{ github.event.number }}/public"
+          SCRIPT_BEFORE: |
+            rm -rf "/var/www/subdomains/pr-${{ github.event.number }}/"
+            mkdir -p "/var/www/subdomains/pr-${{ github.event.number }}/"
+          SCRIPT_AFTER: |
+            cd "/var/www/subdomains/pr-${{ github.event.number }}/public"
+            (cd include && for i in countries.inc last_updated.inc mirrors.inc pregen-confs.inc pregen-events.inc pregen-news.inc; do wget "https://www.php.net/include/$i" -O $i; done;)
+            (cd backend && for i in ip-to-country.db ip-to-country.idx; do wget "https://www.php.net/backend/$i" -O $i; done;)
+
+      - uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.number }}
+          edit-mode: 'replace'
+          body: |
+            🚀 Deployed on http://pr-${{ github.event.number }}.preview.sergeypanteleev.com
