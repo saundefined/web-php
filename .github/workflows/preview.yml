@@ -16,7 +16,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          TARGET: "/var/www/subdomains/pr-${{ github.event.number }}/"
+          TARGET: "/var/www/subdomains/pr-${{ github.event.number }}/public"
           SCRIPT_BEFORE: |
             rm -rf "/var/www/subdomains/pr-${{ github.event.number }}/"
             mkdir -p "/var/www/subdomains/pr-${{ github.event.number }}/"
