@@ -16,7 +16,8 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          TARGET: "/var/www/subdomains/pr-${{ github.event.number }}/"
+          SCRIPT_BEFORE: |
+            rm -rf "/var/www/subdomains/pr-${{ github.event.number }}/"
           SCRIPT_AFTER: |
             cd "/var/www/subdomains/pr-${{ github.event.number }}/"
             git clone https://github.com/php/doc-base.git
