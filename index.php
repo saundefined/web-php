@@ -93,7 +93,7 @@ $content .= "</div>";
 $intro = <<<EOF
   <div class="hero">
     <img class="hero-logo" src="/images/logos/php-logo-white.svg" alt="php" width="240" height="120">
-    <p class="hero-text">Test message</p>
+    <p class="hero-text">Test updated message</p>
     <div class="hero-actions">
       <a href="/releases/8.3/index.php" class="hero-btn hero-btn-primary">What's new in 8.3</a>
       <a href="/downloads.php" class="hero-btn hero-btn-secondary">Download</a>
