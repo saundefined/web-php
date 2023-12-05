@@ -21,8 +21,10 @@ jobs:
             rm -rf "/var/www/subdomains/pr-${{ github.event.number }}/"
             mkdir -p "/var/www/subdomains/pr-${{ github.event.number }}/"
           SCRIPT_AFTER: |
+            cd "/var/www/subdomains/pr-${{ github.event.number }}/public"
             (cd include && for i in countries.inc last_updated.inc mirrors.inc pregen-confs.inc pregen-events.inc pregen-news.inc; do wget "https://www.php.net/include/$i" -O $i; done;)
             (cd backend && for i in ip-to-country.db ip-to-country.idx; do wget "https://www.php.net/backend/$i" -O $i; done;)
+
             cd "/var/www/subdomains/pr-${{ github.event.number }}/"
             git clone https://github.com/php/doc-base.git
             git clone https://github.com/php/doc-en.git en
