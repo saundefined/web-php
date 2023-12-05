@@ -18,6 +18,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SCRIPT_BEFORE: |
             rm -rf "/var/www/subdomains/pr-${{ github.event.number }}/"
+            mkdir -p "/var/www/subdomains/pr-${{ github.event.number }}/"
           SCRIPT_AFTER: |
             cd "/var/www/subdomains/pr-${{ github.event.number }}/"
             git clone https://github.com/php/doc-base.git
