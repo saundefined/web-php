@@ -28,6 +28,5 @@ jobs:
       - uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{ github.event.number }}
-          comment_tag: deployment
           body: |
             🚀 Deployed on http://pr-${{ github.event.number }}.preview.sergeypanteleev.com
