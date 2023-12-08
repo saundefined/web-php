@@ -15,10 +15,12 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - name: Close old issues that need feedback
-        uses: dwieeb/needs-reply@v2
+      - uses: actions/stale@v9
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-label: "Status: Needs Feedback"
           days-before-close: 14
-          close-message: "No feedback was provided. The issue is being suspended because we assume that you are no longer experiencing the problem. If this is not the case and you are able to provide the information that was requested earlier, please do so. Thank you."
+          days-before-stale: 90
+          only-labels: "Status: Needs Feedback"
+          stale-pr-message: "There has not been any recent activity in this PR. It will automatically be closed in 14 days if no further action is taken."
+          close-pr-message: "No feedback was provided. The pull request is being suspended because we assume that you are no longer experiencing the problem. If this is not the case and you are able to provide the information that was requested earlier, please do so. Thank you."
+          stale-issue-message: "There has not been any recent activity in this issue. It will automatically be closed in 14 days if no further action is taken."
+          close-issue-message: "No feedback was provided. The issue is being suspended because we assume that you are no longer experiencing the problem. If this is not the case and you are able to provide the information that was requested earlier, please do so. Thank you."
