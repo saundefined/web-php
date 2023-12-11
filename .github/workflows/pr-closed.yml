@@ -13,4 +13,4 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: rm -rf "/home/thephpfoundation/preview/web-php-pr-${{ github.event.number }}/"
+          script: bash /home/thephpfoundation/scripts/pr_closed.sh web-php ${{ github.event.number }}

@@ -17,23 +17,8 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           TARGET: "/home/thephpfoundation/preview/web-php-pr-${{ github.event.number }}/public"
-          SCRIPT_BEFORE: |
-            rm -rf "/home/thephpfoundation/preview/web-php-pr-${{ github.event.number }}/"
-            mkdir -p "/home/thephpfoundation/preview/web-php-pr-${{ github.event.number }}/"
-          SCRIPT_AFTER: |
-            cd "/home/thephpfoundation/preview/web-php-pr-${{ github.event.number }}/public"
-            (cd include && for i in countries.inc last_updated.inc mirrors.inc pregen-confs.inc pregen-events.inc pregen-news.inc; do wget "https://www.php.net/include/$i" -O $i; done;)
-            (cd backend && for i in ip-to-country.db ip-to-country.idx; do wget "https://www.php.net/backend/$i" -O $i; done;)
-
-            cd "/home/thephpfoundation/preview/web-php-pr-${{ github.event.number }}"
-            git clone https://github.com/php/doc-base.git
-            git clone https://github.com/php/doc-en.git en
-            git clone https://github.com/php/phd.git phd
-            php doc-base/configure.php
-            php -dmemory_limit=2G phd/render.php --docbook doc-base/.manual.xml -P PHP -f php
-            cd public
-            rm -rf manual/en
-            (cd manual && ln -s `pwd`/../../output/php-web en)
+          SCRIPT_BEFORE: bash /home/thephpfoundation/scripts/pr_created_pre.sh web-php ${{ github.event.number }}
+          SCRIPT_AFTER: bash /home/thephpfoundation/scripts/pr_created.sh web-php ${{ github.event.number }}
 
       - uses: peter-evans/create-or-update-comment@v3
         with:
