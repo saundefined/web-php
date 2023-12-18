@@ -6,11 +6,11 @@ on:
 jobs:
   build:
     runs-on: "ubuntu-22.04"
-    if: github.repository_owner == 'php'
+    if: github.repository_owner == 'saundefined'
     steps:
-      - uses: appleboy/ssh-action@v1.0.0
+      - uses: garygrossgarten/github-action-ssh@0.7.0
         with:
+          command: bash /home/thephpfoundation/scripts/pr_closed.sh web-php ${{ github.event.number }}
           host: ${{ secrets.PREVIEW_REMOTE_HOST }}
           username: ${{ secrets.PREVIEW_REMOTE_USER }}
-          key: ${{ secrets.PREVIEW_SSH_KEY }}
-          script: bash /home/thephpfoundation/scripts/pr_closed.sh web-php ${{ github.event.number }}
+          privateKey: ${{ secrets.PREVIEW_SSH_KEY }}
