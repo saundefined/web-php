@@ -1,12 +1,12 @@
 name: Remove preview PR
 on:
-  pull_request:
+  pull_request_target:
     types: [ closed ]
 
 jobs:
   build:
     runs-on: "ubuntu-22.04"
-    if: github.repository_owner == 'php'
+    if: github.repository_owner == 'saundefined'
     steps:
       - uses: appleboy/ssh-action@v1.0.0
         with:
