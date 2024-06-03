@@ -69,6 +69,6 @@ jobs:
         uses: test-room-7/action-update-file@v1
         if: ${{ !cancelled() }}
         with:
-          file-path: tests/Visual
+          file-path: tests/Visual/**/*
           commit-msg: Update snapshots
           github-token: ${{ secrets.GITHUB_TOKEN }}
