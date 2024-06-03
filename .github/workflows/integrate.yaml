@@ -214,3 +214,26 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - uses: easingthemes/ssh-deploy@main
+        with:
+          REMOTE_HOST: ${{ secrets.PREVIEW_REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.PREVIEW_REMOTE_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.PREVIEW_SSH_KEY }}
+          SOURCE: "playwright-report/"
+          TARGET: "/home/thephpfoundation/preview/web-php-snapshot-pr-${{ github.event.number }}/public"
+          SCRIPT_BEFORE: bash /home/thephpfoundation/scripts/pr_created_pre.sh web-php-snapshot ${{ github.event.number }}
+
+      - uses: peter-evans/find-comment@v3
+        id: snapshot
+        with:
+          issue-number: ${{ github.event.number }}
+          comment-author: 'github-actions[bot]'
+
+      - uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.number }}
+          comment-id: ${{ steps.snapshot.outputs.comment-id }}
+          edit-mode: 'replace'
+          body: |
+            🚀 Commit ${{ github.sha }} Snapshots on https://web-php-snapshot-pr-${{ github.event.number }}.preview.thephp.foundation
