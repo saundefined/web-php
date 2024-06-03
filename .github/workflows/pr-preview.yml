@@ -103,6 +103,7 @@ jobs:
           retention-days: 30
 
       - uses: easingthemes/ssh-deploy@main
+        if: ${{ !cancelled() }}
         with:
           REMOTE_HOST: ${{ secrets.PREVIEW_REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.PREVIEW_REMOTE_USER }}
@@ -112,12 +113,14 @@ jobs:
           SCRIPT_BEFORE: bash /home/thephpfoundation/scripts/pr_created_pre.sh web-php-snapshot ${{ github.event.number }}
 
       - uses: peter-evans/find-comment@v3
+        if: ${{ !cancelled() }}
         id: snapshot
         with:
           issue-number: ${{ github.event.number }}
           comment-author: 'github-actions[bot]'
 
       - uses: peter-evans/create-or-update-comment@v4
+        if: ${{ !cancelled() }}
         with:
           issue-number: ${{ github.event.number }}
           comment-id: ${{ steps.snapshot.outputs.comment-id }}
