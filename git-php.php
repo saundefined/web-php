@@ -20,7 +20,7 @@ $SIDEBAR_DATA = '
 <h3>Git access</h3>
 <p>
  If you would like to grab PHP sources or other PHP.net
- hosted project data from PHP.net, you can also use 
+ hosted project data from PHP.net, you can also use
  <a href="/git.php">Git</a>. No Git account is required.
 </p>
 ';
@@ -52,6 +52,9 @@ if (count($_POST) && (!isset($_POST['purpose']) || !is_array($_POST['purpose']) 
         $error .= "Your user id must be from 1-16 characters long, start with " .
                   "a letter and contain nothing but a-z, 0-9, and _ <br>";
     }
+    if (empty($_POST['github'])) {
+        $error .= "You must supply your GitHub account. <br>";
+    }
     if (empty($_POST['fullname'])) {
         $error .= "You must supply your real name. <br>";
     }
@@ -80,6 +83,7 @@ if (count($_POST) && (!isset($_POST['purpose']) || !is_array($_POST['purpose']) 
             "https://main.php.net/entry/svn-account.php",
             [
                 "username" => $_POST['id'],
+                "github" => $_POST['github'],
                 "name" => $_POST['fullname'],
                 "email" => $_POST['email'],
                 "passwd" => $_POST['password'],
@@ -388,6 +392,10 @@ foreach ($purposes as $i => $p) { ?>
  <th class="subr">Requested Password:</th>
  <td><input type="password" size="10" name="password"
       class="max" value="<?php if (isset($_POST['password'])) echo clean($_POST['password']);?>"></td>
+</tr>
+<tr>
+ <th class="subr">GitHub account:</th>
+ <td><input type="text" size="39" name="github" class="max" value="<?php if (isset($_POST['github'])) echo clean($_POST['github']);?>"></td>
 </tr>
 <tr>
  <th class="subr">Did you fill this form out correctly (yes/no)?</th>
