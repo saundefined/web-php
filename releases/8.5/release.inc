@@ -254,18 +254,9 @@ PHP
                     <div class="php8-code phpcode">
                         <?php highlight_php_trimmed(
                                 <<<'PHP'
-$releases = [
-    '8.5' => '2025-11-20',
-    '8.4' => '2024-11-21',
-    '8.3' => '2023-11-23',
-    '8.2' => '2022-12-08',
-];
-
-$firstKey = array_key_first($releases);
-$newestDate = $releases[$firstKey];
-
-var_dump($newestDate);
-// string(10) "2025-11-20"
+$lastEvent = $events === []
+    ? null
+    : $events[array_key_last($events)];
 PHP
 
                         ); ?>
@@ -277,17 +268,7 @@ PHP
                     <div class="php8-code phpcode">
                         <?php highlight_php_trimmed(
                                 <<<'PHP'
-$releases = [
-    '8.5' => '2025-11-20',
-    '8.4' => '2024-11-21',
-    '8.3' => '2023-11-23',
-    '8.2' => '2022-12-08',
-];
-
-$newestDate = array_first($releases);
-
-var_dump($newestDate);
-// string(10) "2025-11-20"
+$lastEvent = array_last($events);
 PHP
                         ); ?>
                     </div>
