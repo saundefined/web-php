@@ -414,12 +414,12 @@ PHP
                     <li>The backtick operator as an alias for <code>shell_exec()</code> has been deprecated.</li>
                     <li>Non-canonical cast names <code>(boolean)</code>, <code>(integer)</code>, <code>(double)</code>, and <code>(binary)</code> have been deprecated. Use <code>(bool)</code>, <code>(int)</code>, <code>(float)</code>, and <code>(string)</code> instead, respectively.</li>
                     <li>The <code>disable_classes</code> INI setting has been removed as it causes various engine assumptions to be broken.</li>
-                    <li>Returning a non-string from a user output handler is deprecated.</li>
                     <li>Terminating case statements with a semicolon instead of a colon has been deprecated.</li>
                     <li>Using <code>null</code> as an array offset or when calling <code>array_key_exists()</code> is now deprecated. Use an empty string instead.</li>
                     <li>It is no longer possible to use "array" and "callable" as class alias names in <code>class_alias()</code>.</li>
                     <li>The <code>__sleep()</code> and <code>__wakeup()</code> magic methods have been soft-deprecated. The <code>__serialize()</code> and <code>__unserialize()</code> magic methods should be used instead.</li>
                     <li>A warning is now emitted when casting <code>NAN</code> to other types.</li>
+                    <li>Destructuring non-array values (other than <code>null</code>) using <code>[]</code> or <code>list()</code> now emits a warning.</li>
                     <li>A warning is now emitted when casting floats (or strings that look like floats) to <code>int</code> if they cannot be represented as one.</li>
                 </ul>
             </div>
