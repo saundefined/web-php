@@ -254,34 +254,9 @@ PHP
                     <div class="php8-code phpcode">
                         <?php highlight_php_trimmed(
                                 <<<'PHP'
-final class Stopwatch
-{
-    private int $start;
-    public private(set) array $laps = [];
-
-    public function __construct()
-    {
-        $this->start = hrtime(true);
-    }
-
-    public function stopLap()
-    {
-        $fromStart = hrtime(true) - $this->start;
-        $lastLap = $this->laps !== []
-            ? $this->laps[array_key_last($this->laps)]
-            : 0;
-        $lapDuration = $fromStart - $lastLap;
-
-        $this->laps[] = $fromStart;
-
-        return $lapDuration;
-    }
-}
-
-$watch = new Stopwatch();
-for ($i = 1; $i < 5; $i++) {
-    printf("Lap #%d took %dns\n", $i, $watch->stopLap());
-}
+$lastEvent = $events === []
+    ? null
+    : $events[array_key_last($events)];
 PHP
 
                         ); ?>
@@ -293,32 +268,7 @@ PHP
                     <div class="php8-code phpcode">
                         <?php highlight_php_trimmed(
                                 <<<'PHP'
-final class Stopwatch
-{
-    private int $start;
-    public private(set) array $laps = [];
-
-    public function __construct()
-    {
-        $this->start = hrtime(true);
-    }
-
-    public function stopLap()
-    {
-        $fromStart = hrtime(true) - $this->start;
-        $lastLap = array_last($this->laps) ?? 0;
-        $lapDuration = $fromStart - $lastLap;
-
-        $this->laps[] = $fromStart;
-
-        return $lapDuration;
-    }
-}
-
-$watch = new Stopwatch();
-for ($i = 1; $i < 5; $i++) {
-    printf("Lap #%d took %dns\n", $i, $watch->stopLap());
-}
+$lastEvent = array_last($events);
 PHP
                         ); ?>
                     </div>
