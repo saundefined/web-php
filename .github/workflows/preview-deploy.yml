@@ -46,7 +46,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.PREVIEW_REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.PREVIEW_REMOTE_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.PREVIEW_SSH_KEY }}
-          SOURCE: "./pr-code/"
+          SOURCE: "./"
           TARGET: "/home/thephpfoundation/preview/web-php-pr-${{ steps.pr-number.outputs.pr_number }}/public"
           SCRIPT_BEFORE: bash /home/thephpfoundation/scripts/pr_created_pre.sh web-php ${{ steps.pr-number.outputs.pr_number }}
           SCRIPT_AFTER: bash /home/thephpfoundation/scripts/pr_created.sh web-php ${{ steps.pr-number.outputs.pr_number }}
