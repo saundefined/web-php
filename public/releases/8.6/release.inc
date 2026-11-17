@@ -28,31 +28,17 @@ $comparisons = [
             message('documentation', $lang) . "|/manual/$documentation/functions.partial-application.php",
         ],
         before: <<<'PHP'
-            $versions = [
-                '8.4',
-                '8.5',
-                '8.6',
-                '8.7',
-                // …
-                '9.0',
-            ];
+            $versions = ['8.4', '8.5', '8.6', '8.7', '9.0'];
 
-            $supportsPartialFunctionApplication = array_filter(
+            $supported = array_filter(
                 $versions,
                 fn ($version) => version_compare($version, '8.6', '>='),
             );
             PHP,
         after: <<<'PHP'
-            $versions = [
-                '8.4',
-                '8.5',
-                '8.6',
-                '8.7',
-                // …
-                '9.0',
-            ];
+            $versions = ['8.4', '8.5', '8.6', '8.7', '9.0'];
 
-            $supportsPartialFunctionApplication = array_filter(
+            $supported = array_filter(
                 $versions,
                 version_compare(?, '8.6', '>='),
             );
