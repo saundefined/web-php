@@ -16,7 +16,7 @@ return [
     'key_features_description' => '<p><strong>Faster</strong>, <strong>cleaner</strong>, and <strong>built for developers</strong>.</p>',
 
     'features_pfa_description' => '<p>Allows some of a function\'s arguments to be provided in advance, returning a Closure that accepts the rest.</p>',
-    'features_readonly_property_defaults_description' => '<p>Allows default values for instance readonly properties.</p>',
+    'features_readonly_property_defaults_description' => '<p>Allows readonly properties to declare default values, so fixed values no longer have to be assigned in the constructor.</p>',
     'features_polling_api_description' => '<p>Scalable I/O multiplexing using epoll, kqueue, and other native mechanisms, available to event loop libraries like ReactPHP and AMPHP.</p>',
     'features_clamp_description' => '<p>Ensures that a given value (numeric or otherwise) falls within a specified range.</p>',
     'features_duration_description' => '<p>The Duration class represents elapsed time as measured by a stopwatch.</p>',
@@ -25,7 +25,7 @@ return [
     'pfa_title' => 'Partial Function Application',
     'pfa_description' => 'Allows some of a function\'s arguments to be provided in advance, using <code>?</code> and <code>...</code> placeholders for the rest. The result is a Closure, and the function is only called once the remaining arguments are passed to it.',
     'readonly_property_defaults_title' => 'Readonly property defaults',
-    'readonly_property_defaults_description' => 'Allows default values for instance readonly properties.',
+    'readonly_property_defaults_description' => 'Instance readonly properties, including those in readonly classes, can now declare a default value. This makes it simple to implement get-only interface properties with fixed values, which previously required assigning them in a constructor. The default counts as the property\'s initialization, so the constructor cannot overwrite it.',
     'polling_api_title' => 'Polling API',
     'polling_api_description' => 'The new <code>Io\Poll</code> API efficiently monitors many streams at once using the best mechanism available on each platform (epoll, kqueue, event ports, or WSAPoll), without the scalability limits of <code>stream_select()</code>. It is designed as a common foundation that event loop libraries such as ReactPHP and AMPHP can build on.',
     'clamp_title' => 'New <code>clamp()</code> function',
